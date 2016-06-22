@@ -1,0 +1,9 @@
+%{
+#include "hpp.hpp"
+%}
+%defines %union { string *s; }
+%token <s> TOKEN
+%%
+REPL : | REPL TOKEN { cout << "<"<<*$2<<">"; } ;
+%%
+

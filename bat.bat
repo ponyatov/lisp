@@ -1,2 +1,1 @@
-@git gui
-@gvim -p src.src log.log ypp.ypp lpp.lpp hpp.hpp cpp.cpp Makefile
+@gvim -p lisp.lisp log.log ypp.ypp lpp.lpp hpp.hpp cpp.cpp Makefile

@@ -1,0 +1,11 @@
+%{
+#include "hpp.hpp"
+#define TOC(X) { yylval.s = new string(yytext); return X; }
+%}
+%option noyywrap
+%option yylineno
+%%
+[()]			TOC(TOKEN)
+[0-9]+			TOC(TOKEN)
+[a-zA-Z0-9_]+	TOC(TOKEN)
+%%
