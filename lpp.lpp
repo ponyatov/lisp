@@ -4,6 +4,7 @@
 %option noyywrap
 %option yylineno
 %%
+#[^\n]*\n		{}
 \(				TOC(Op,LP)
 \)				TOC(Op,RP)
 [+\-*/]			TOC(Op,OP)

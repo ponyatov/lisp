@@ -4,8 +4,13 @@
 %defines %union { Sym*o; }
 %token <o> SYM NUM OP
 %token <o> LP RP
-%type <o> atom
+%type <o> atom ex
 %%
-REPL : | REPL atom { cout << $2->dump(); } ;
-atom : SYM | NUM | OP |LP|RP;
+REPL : | REPL ex { cout << $2->dump(); } ;
+atom : SYM | NUM | OP ;
+ex : atom
+	| OP ex ex	{ $$=$1; $$->push($2); $$->push($3); } 
+	| LP RP		{ $$=new Op("()"); }
+	| LP ex RP	{ $$=new Op("()"); $$->push($2); }
+;
 %%

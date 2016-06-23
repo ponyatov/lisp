@@ -3,12 +3,15 @@
 
 #include <iostream>
 #include <cstdlib>
+#include <vector>
+#include <map>
 using namespace std;
 
 struct Sym {
 	string tag,val;
 	Sym(string,string); Sym(string);
-	virtual string dump();
+	vector<Sym*> nest; void push(Sym*);
+	virtual string dump(int=0); string head(); string pad(int);
 };
 
 struct Num: Sym { Num(string); };
