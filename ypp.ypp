@@ -1,9 +1,11 @@
 %{
 #include "hpp.hpp"
 %}
-%defines %union { string *s; }
-%token <s> TOKEN
+%defines %union { Sym*o; }
+%token <o> SYM NUM OP
+%token <o> LP RP
+%type <o> atom
 %%
-REPL : | REPL TOKEN { cout << "<"<<*$2<<">"; } ;
+REPL : | REPL atom { cout << $2->dump(); } ;
+atom : SYM | NUM | OP |LP|RP;
 %%
-

@@ -3,7 +3,7 @@ log.log: lisp.lisp ./exe.exe
 C = cpp.cpp ypp.tab.cpp lex.yy.c
 H = hpp.hpp ypp.tab.hpp
 ./exe.exe: $(C) $(H) Makefile
-	$(CXX) -o $@ $(C)
+	$(CXX) -std=gnu++11 -o $@ $(C)
 ypp.tab.cpp: ypp.ypp
 	bison $<
 lex.yy.c: lpp.lpp
