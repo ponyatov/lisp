@@ -31,10 +31,9 @@ Sym* Num::mul(Sym*o) { cerr<<val<<".mul\n";
 }
 
 Op::Op(string V):Sym("op",V){}
-Sym* Op::apply(Sym*o) { cerr<<val<<".apply\n";
+Sym* Op::apply(Sym*o) {
 	if (val=="*") return o->nest[0]->mul(o->nest[1]);
-	else return this;
-}
+	return this; }
 
 Cons::Cons(Sym*A,Sym*B):Sym("cons","") { push(A); push(B); }
 string Cons::head() { return "."; }
