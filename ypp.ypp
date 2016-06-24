@@ -2,15 +2,16 @@
 #include "hpp.hpp"
 %}
 %defines %union { Sym*o; }
-%token <o> SYM NUM OP
-%token <o> LP RP
-%type <o> atom ex
+%token <o> SYM NUM OP		/* symbol number operator	*/
+%token <o> LP RP			/* ()						*/
+%type <o> atom ex list
 %%
-REPL : | REPL ex { cout << $2->dump(); } ;
+REPL : | REPL ex 		{ cout << $2->dump(); } ;
 atom : SYM | NUM | OP ;
 ex : atom
-	| OP ex ex	{ $$=$1; $$->push($2); $$->push($3); } 
-	| LP RP		{ $$=new Op("()"); }
-	| LP ex RP	{ $$=new Op("()"); $$->push($2); }
+	| LP list RP		{ $$=$2; }
+;
+list :					{ $$=nil; }
+	| ex list			{ $$=new Cons($1,$2); }
 ;
 %%

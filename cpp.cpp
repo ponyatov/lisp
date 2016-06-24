@@ -17,3 +17,8 @@ string Sym::dump(int depth) { string S = "\n"+pad(depth)+head();
 Num::Num(string V):Sym("num",V){}
 
 Op::Op(string V):Sym("op",V){}
+
+Cons::Cons(Sym*A,Sym*B):Sym("cons","") { push(A); push(B); }
+string Cons::head() { return "."; }
+
+Sym* nil = new Sym("nil","");

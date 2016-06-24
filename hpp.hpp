@@ -11,12 +11,16 @@ struct Sym {
 	string tag,val;
 	Sym(string,string); Sym(string);
 	vector<Sym*> nest; void push(Sym*);
-	virtual string dump(int=0); string head(); string pad(int);
+	virtual string dump(int=0); virtual string head(); string pad(int);
 };
+
+extern Sym* nil;
 
 struct Num: Sym { Num(string); };
 
 struct Op: Sym { Op(string); };
+
+struct Cons: Sym { Cons(Sym*,Sym*); string head(); };
 
 extern int yylex();
 extern int yylineno;
