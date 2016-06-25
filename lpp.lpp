@@ -5,6 +5,7 @@
 %%
 #[^\n]*			{}
 \n				{yylineno++;}
+[ \t\r]+		{}
 
 \(				TOC(Op,LP)
 \)				TOC(Op,RP)

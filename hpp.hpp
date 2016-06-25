@@ -15,12 +15,12 @@ struct Sym {
 	virtual string dump(int=0); virtual string head(); string pad(int);
 	virtual Sym* eval();
 	virtual Sym* apply(Sym*);
-	virtual Sym* mul(Sym*);
+	virtual Sym* mul(); virtual Sym* mul(Sym*);
 };
 
 extern Sym* nil;
 
-struct Num: Sym { Num(string); Num(int); Sym*mul(Sym*); };
+struct Num: Sym { Num(string); Num(int); };
 
 struct Op: Sym { Op(string); Sym*apply(Sym*); };
 

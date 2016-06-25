@@ -19,24 +19,24 @@ Sym* Sym::eval() {
 		(*it) = (*it)->eval();
 	return this; }
 
-Sym* Sym::apply(Sym*o) { return nil; }
+Sym* Sym::apply(Sym*o) { push(o); return this; }
 
-Sym* Sym::mul(Sym*o) { return nil; }
+Sym* Sym::mul() {
+	if (nest.size()) return mul(nest[0]->mul());
+	else return this; }
+
+Sym* Sym::mul(Sym*o) { return new Sym(val+"*"+o->val); }
 
 Num::Num(string V):Sym("num",V){}
 Num::Num(int N):Sym("num",""){ ostringstream os; os<<N; val=os.str(); }
-Sym* Num::mul(Sym*o) { cerr<<val<<".mul\n";
-	if (o->tag!="num") return nil;
-	else return new Num(val);//atoi(val.c_str())+atoi(o->val.c_str()));
-}
 
 Op::Op(string V):Sym("op",V){}
 Sym* Op::apply(Sym*o) {
-	if (val=="*") return o->nest[0]->mul(o->nest[1]);
+	if (val=="*") return o->mul();
 	return this; }
 
 Cons::Cons(Sym*A,Sym*B):Sym("cons","") { push(A); push(B); }
 string Cons::head() { return "."; }
-Sym* Cons::eval() { return nest[0]->apply(nest[1]); }
+Sym* Cons::eval() { Sym::eval(); return nest[0]->apply(nest[1]); }
 
 Sym* nil = new Sym("nil","");

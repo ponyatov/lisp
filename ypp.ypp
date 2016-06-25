@@ -6,7 +6,7 @@
 %token <o> LP RP			/* ()						*/
 %type <o> atom ex list
 %%
-REPL : | REPL ex 		{ cout << $2->eval()->dump(); } ;
+REPL : | REPL ex 		{ cout << $2->eval()->dump() <<endl; } ;
 atom : SYM | NUM | OP ;
 ex : atom
 	| LP list RP		{ $$=$2; }
